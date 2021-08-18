@@ -33,7 +33,9 @@
         state: false,
         events: {
           opened: 'drawer.opened',
-          closed: 'drawer.closed'
+          closed: 'drawer.closed',
+          onopen: 'drawer.onopen',
+          onclose: 'drawer.onclose'
         },
         dropdownEvents: {
           opened: 'shown.bs.dropdown',
@@ -118,6 +120,7 @@
       }
 
       return $this
+        .trigger(__.settings.events.onopen)
         .removeClass(__.settings.class.close)
         .addClass(__.settings.class.open)
         .drawerCallback(function triggerOpenedListeners() {
@@ -132,6 +135,7 @@
       if (touches) $this.off('touchmove.' + namespace);
 
       return $this
+        .trigger(__.settings.events.onclose)
         .removeClass(__.settings.class.open)
         .addClass(__.settings.class.close)
         .drawerCallback(function triggerClosedListeners() {
